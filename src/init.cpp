@@ -80,7 +80,7 @@ void Shutdown(void* parg)
         delete pwalletMain;
         CreateThread(ExitTimeout, NULL);
         Sleep(50);
-        printf("FooCoin exited\n\n");
+        printf("quatloos exited\n\n");
         fExit = true;
 #ifndef QT_GUI
         // ensure non UI client get's exited here, but let Bitcoin-Qt reach return 0; in bitcoin.cpp
@@ -134,8 +134,8 @@ bool AppInit(int argc, char* argv[])
 
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
-            // First part of help message is specific to FooCoin server / RPC client
-            std::string strUsage = _("FooCoin version") + " " + FormatFullVersion() + "\n\n" +
+            // First part of help message is specific to quatloos server / RPC client
+            std::string strUsage = _("quatloos version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
                   "  foocoin [options]                     " + "\n" +
                   "  foocoin [options] <command> [params]  " + _("Send command to -server or foocoin") + "\n" +
@@ -190,13 +190,13 @@ int main(int argc, char* argv[])
 
 bool static InitError(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("FooCoin"), CClientUIInterface::OK | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("quatloos"), CClientUIInterface::OK | CClientUIInterface::MODAL);
     return false;
 }
 
 bool static InitWarning(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("FooCoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("quatloos"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
     return true;
 }
 
@@ -232,7 +232,7 @@ std::string HelpMessage()
         "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n" +
         "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n"
         "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n" +
-        "  -port=<port>           " + _("Listen for connections on <port> (default: 55884 or testnet: 45884)") + "\n" +
+        "  -port=<port>           " + _("Listen for connections on <port> (default: 41337 or testnet: 31337)") + "\n" +
         "  -maxconnections=<n>    " + _("Maintain at most <n> connections to peers (default: 125)") + "\n" +
         "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n" +
         "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n" +
@@ -290,7 +290,7 @@ std::string HelpMessage()
     return strUsage;
 }
 
-/** Initialize FooCoin.
+/** Initialize quatloos.
  *  @pre Parameters should be parsed and config file should be read.
  */
 bool AppInit2()
@@ -429,7 +429,7 @@ bool AppInit2()
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  FooCoin is probably already running."), GetDataDir().string().c_str()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  quatloos is probably already running."), GetDataDir().string().c_str()));
 
 #if !defined(WIN32) && !defined(QT_GUI)
     if (fDaemon)
@@ -456,14 +456,14 @@ bool AppInit2()
     if (!fDebug)
         ShrinkDebugFile();
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    printf("FooCoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
+    printf("quatloos version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
     printf("Startup time: %s\n", DateTimeStrFormat("%x %H:%M:%S", GetTime()).c_str());
     printf("Default data directory %s\n", GetDefaultDataDir().string().c_str());
     printf("Used data directory %s\n", GetDataDir().string().c_str());
     std::ostringstream strErrors;
 
     if (fDaemon)
-        fprintf(stdout, "FooCoin server starting\n");
+        fprintf(stdout, "quatloos server starting\n");
 
     int64 nStart;
 
@@ -659,10 +659,10 @@ bool AppInit2()
         if (nLoadWalletRet == DB_CORRUPT)
             strErrors << _("Error loading wallet.dat: Wallet corrupted") << "\n";
         else if (nLoadWalletRet == DB_TOO_NEW)
-            strErrors << _("Error loading wallet.dat: Wallet requires newer version of FooCoin") << "\n";
+            strErrors << _("Error loading wallet.dat: Wallet requires newer version of quatloos") << "\n";
         else if (nLoadWalletRet == DB_NEED_REWRITE)
         {
-            strErrors << _("Wallet needed to be rewritten: restart FooCoin to complete") << "\n";
+            strErrors << _("Wallet needed to be rewritten: restart quatloos to complete") << "\n";
             printf("%s", strErrors.str().c_str());
             return InitError(strErrors.str());
         }
