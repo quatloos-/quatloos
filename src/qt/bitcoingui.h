@@ -1,7 +1,7 @@
 #ifndef BITCOINGUI_H
 #define BITCOINGUI_H
 
-#include <QMainWindow>
+#include <QMainWindow.h>
 #include <QSystemTrayIcon>
 
 class TransactionTableModel;
